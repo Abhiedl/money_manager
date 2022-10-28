@@ -29,10 +29,8 @@ class ScreenHome extends StatelessWidget {
       floatingActionButton: FloatingActionButton(
         onPressed: () {
           if (selectedIndexNotifier.value == 0) {
-            print('Add Transactions.');
             Navigator.of(context).pushNamed(ScreenAddTransaction.routeName);
           } else {
-            print('Add Categories.');
             showCategoryAddPopup(context);
             // final _sample = CategoryModel(
             //   id: DateTime.now().millisecondsSinceEpoch.toString(),

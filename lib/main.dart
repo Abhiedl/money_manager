@@ -3,12 +3,15 @@ import 'package:hive_flutter/adapters.dart';
 import 'package:money_manager/models/category/category_model.dart';
 import 'package:money_manager/models/transaction/transaction_model.dart';
 import 'package:money_manager/screens/add%20transactions/screen_add_transactions.dart';
-import 'package:money_manager/screens/home/screen_home.dart';
 import 'package:money_manager/screens/splash/splash_screen.dart';
+import 'package:money_manager/models/login/login_model.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Hive.initFlutter();
+  if (!Hive.isAdapterRegistered(LoginModelAdapter().typeId)) {
+    Hive.registerAdapter(LoginModelAdapter());
+  }
   if (!Hive.isAdapterRegistered(CategoryTypeAdapter().typeId)) {
     Hive.registerAdapter(CategoryTypeAdapter());
   }

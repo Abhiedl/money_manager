@@ -23,14 +23,6 @@ class _ScreenAddTransactionState extends State<ScreenAddTransaction> {
     super.initState();
   }
 
-/* 
-purpose
-amount
-date
-income/expense
-category type
-*/
-
   final _purposeTextEditingController = TextEditingController();
   final _amountTextEditingController = TextEditingController();
 
@@ -70,7 +62,6 @@ category type
                   if (_selectedDateTemp == null) {
                     return;
                   } else {
-                    print(_selectedDateTemp.toString());
                     setState(() {
                       _selectedDate = _selectedDateTemp;
                     });
@@ -125,7 +116,6 @@ category type
                   );
                 }).toList(),
                 onChanged: (selectedValue) {
-                  print(selectedValue);
                   setState(() {
                     _categoryID = selectedValue;
                   });
@@ -136,7 +126,6 @@ category type
                 child: ElevatedButton(
                   onPressed: () {
                     addTransaction();
-                    print('Submitted');
                   },
                   child: Text('Submit'),
                 ),
