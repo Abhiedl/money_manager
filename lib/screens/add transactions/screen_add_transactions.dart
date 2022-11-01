@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
 import 'package:money_manager/db/category/category_db.dart';
 import 'package:money_manager/db/transaction/transaction_db.dart';
 import 'package:money_manager/models/category/category_model.dart';
@@ -59,6 +60,7 @@ class _ScreenAddTransactionState extends State<ScreenAddTransaction> {
                     firstDate: DateTime.now().subtract(Duration(days: 30)),
                     lastDate: DateTime.now(),
                   );
+
                   if (_selectedDateTemp == null) {
                     return;
                   } else {
@@ -70,7 +72,7 @@ class _ScreenAddTransactionState extends State<ScreenAddTransaction> {
                 icon: const Icon(Icons.calendar_today),
                 label: Text(_selectedDate == null
                     ? 'Select date'
-                    : _selectedDate.toString()),
+                    : "${_selectedDate!.day}/${_selectedDate!.month}/${_selectedDate!.year}"),
               ),
               //income/expense
               Row(
