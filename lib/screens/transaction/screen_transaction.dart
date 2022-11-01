@@ -45,6 +45,7 @@ class ScreenTransaction extends StatelessWidget {
                         backgroundColor: _value.type == CategoryType.income
                             ? Colors.green
                             : Colors.red,
+                        foregroundColor: Colors.white,
                         child: Text(
                           parseDate(_value.date),
                           textAlign: TextAlign.center,

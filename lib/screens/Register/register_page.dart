@@ -1,57 +1,104 @@
 import 'package:flutter/material.dart';
+import 'package:form_field_validator/form_field_validator.dart';
 import 'package:money_manager/db/login/login_db.dart';
 import 'package:money_manager/models/login/login_model.dart';
 import 'package:money_manager/screens/log_in/log_in.dart';
 
-final _usernameEditingController = TextEditingController();
-
-final _passwordEditingController = TextEditingController();
-
-class RegistrationScreen extends StatelessWidget {
+class RegistrationScreen extends StatefulWidget {
   const RegistrationScreen({super.key});
+
+  @override
+  State<RegistrationScreen> createState() => _RegistrationScreenState();
+}
+
+class _RegistrationScreenState extends State<RegistrationScreen> {
+  final _usernameEditingController = TextEditingController();
+  final _passwordEditingController = TextEditingController();
+
+  var _passwordVisible = false;
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       body: Padding(
-        padding: const EdgeInsets.all(18.0),
+        padding: const EdgeInsets.all(28.0),
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             const Text(
               'REGISTER',
               style: TextStyle(
-                color: Colors.green,
-                fontSize: 25,
-              ),
+                  color: Colors.blueAccent,
+                  fontSize: 25,
+                  fontWeight: FontWeight.bold),
             ),
             const Padding(
               padding: EdgeInsets.only(bottom: 30),
             ),
             TextFormField(
+              autovalidateMode: AutovalidateMode.onUserInteraction,
               controller: _usernameEditingController,
+              validator: (value) {
+                if (value!.isEmpty ||
+                    RegExp(r'[!@#<>?":_`~;[\]\\|=+)(*&^%0-9-]')
+                        .hasMatch(value)) {
+                  return 'Only alphabets allowed';
+                } else {
+                  return null;
+                }
+              },
               decoration: const InputDecoration(
-                  border: OutlineInputBorder(
-                      borderRadius: BorderRadius.all(Radius.circular(100))),
-                  hintText: 'Username'),
+                labelText: 'Username',
+                contentPadding: EdgeInsets.only(left: 10),
+                border: OutlineInputBorder(
+                    borderRadius: BorderRadius.all(Radius.circular(15))),
+              ),
             ),
             const SizedBox(
-              height: 10,
+              height: 20,
             ),
             TextFormField(
+              obscureText: !_passwordVisible,
+              autovalidateMode: AutovalidateMode.onUserInteraction,
               controller: _passwordEditingController,
-              decoration: const InputDecoration(
-                  border: OutlineInputBorder(
-                      borderRadius: BorderRadius.all(Radius.circular(100))),
-                  hintText: 'Password'),
+              validator: (value) {
+                if (value!.isEmpty || value.length < 6) {
+                  return 'Should contain atleast 6 characters.';
+                } else {
+                  return null;
+                }
+              },
+              decoration: InputDecoration(
+                suffixIcon: IconButton(
+                  icon: Icon(_passwordVisible
+                      ? Icons.visibility
+                      : Icons.visibility_off),
+                  onPressed: () {
+                    setState(() {
+                      _passwordVisible = !_passwordVisible;
+                    });
+                  },
+                ),
+                labelText: 'Password',
+                contentPadding: EdgeInsets.only(left: 10),
+                border: OutlineInputBorder(
+                    borderRadius: BorderRadius.all(Radius.circular(15))),
+              ),
             ),
             const SizedBox(height: 20),
             ElevatedButton(
                 onPressed: () async {
                   addLoginCredential();
-                  Navigator.of(context).pop();
                   final _data = await LoginDb.instance.getUsers();
                   final _datalist = _data.toList();
+                  _passwordEditingController.clear();
+                  _usernameEditingController.clear();
+                  const snackBar = SnackBar(
+                    content: Text('Account created.'),
+                    duration: Duration(milliseconds: 2000),
+                  );
+                  ScaffoldMessenger.of(context).showSnackBar(snackBar);
+                  Navigator.of(context).pop();
                 },
                 child: const Text('Create Account')),
             TextButton(
