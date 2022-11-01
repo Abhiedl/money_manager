@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:form_field_validator/form_field_validator.dart';
+//import 'package:form_field_validator/form_field_validator.dart';
 import 'package:money_manager/db/login/login_db.dart';
-import 'package:money_manager/models/login/login_model.dart';
+//import 'package:money_manager/models/login/login_model.dart';
 import 'package:money_manager/screens/Register/register_page.dart';
 import 'package:money_manager/screens/home/screen_home.dart';
 
@@ -99,13 +99,14 @@ class _LogInScreenState extends State<LogInScreen> {
               ),
               ElevatedButton(
                   onPressed: () async {
-                    final _user = _usernameTextEditingController.text.trim();
-                    final _pass = _passwordTextEditingController.text.trim();
-                    final _logindata = await LoginDb.instance.getUsers();
-                    final _loginUserPass = _logindata.toList();
+                    final user = _usernameTextEditingController.text.trim();
+                    final pass = _passwordTextEditingController.text.trim();
+                    final logindata = await LoginDb.instance.getUsers();
+                    final loginUserPass = logindata.toList();
 
-                    await Future.forEach(_loginUserPass, (user) {
-                      if (user.username == _user && user.password == _pass) {
+                    await Future.forEach(loginUserPass, (userdata) {
+                      if (userdata.username == user &&
+                          userdata.password == pass) {
                         showSnackbar = 1;
                         Navigator.of(context).pushReplacement(
                             MaterialPageRoute(builder: ((context) {

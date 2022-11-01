@@ -21,18 +21,18 @@ class ScreenTransaction extends StatelessWidget {
             (BuildContext context, List<TransactionModel> newList, Widget? _) {
           return ListView.separated(
             itemBuilder: (ctx, index) {
-              final _value = newList[index];
+              final value = newList[index];
               return Slidable(
-                key: Key(_value.id!),
+                key: Key(value.id!),
                 startActionPane: ActionPane(
-                  motion: ScrollMotion(),
+                  motion: const ScrollMotion(),
                   children: [
                     SlidableAction(
                       onPressed: (ctx) {
-                        TransactionDb.instance.deleteTransaction(_value.id!);
+                        TransactionDb.instance.deleteTransaction(value.id!);
                       },
                       icon: Icons.delete,
-                      foregroundColor: Color.fromARGB(255, 247, 19, 3),
+                      foregroundColor: const Color.fromARGB(255, 247, 19, 3),
                       label: 'Delete',
                     )
                   ],
@@ -42,16 +42,16 @@ class ScreenTransaction extends StatelessWidget {
                   child: ListTile(
                     leading: CircleAvatar(
                         radius: 50,
-                        backgroundColor: _value.type == CategoryType.income
+                        backgroundColor: value.type == CategoryType.income
                             ? Colors.green
                             : Colors.red,
                         foregroundColor: Colors.white,
                         child: Text(
-                          parseDate(_value.date),
+                          parseDate(value.date),
                           textAlign: TextAlign.center,
                         )),
-                    title: Text('Rs.${_value.amount}'),
-                    subtitle: Text(_value.purpose),
+                    title: Text('Rs.${value.amount}'),
+                    subtitle: Text(value.purpose),
                   ),
                 ),
               );

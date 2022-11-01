@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:form_field_validator/form_field_validator.dart';
+//import 'package:form_field_validator/form_field_validator.dart';
 import 'package:money_manager/db/login/login_db.dart';
 import 'package:money_manager/models/login/login_model.dart';
 import 'package:money_manager/screens/log_in/log_in.dart';
@@ -80,8 +80,8 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
                   },
                 ),
                 labelText: 'Password',
-                contentPadding: EdgeInsets.only(left: 10),
-                border: OutlineInputBorder(
+                contentPadding: const EdgeInsets.only(left: 10),
+                border: const OutlineInputBorder(
                     borderRadius: BorderRadius.all(Radius.circular(15))),
               ),
             ),
@@ -89,8 +89,8 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
             ElevatedButton(
                 onPressed: () async {
                   addLoginCredential();
-                  final _data = await LoginDb.instance.getUsers();
-                  final _datalist = _data.toList();
+                  final data = await LoginDb.instance.getUsers();
+                  final datalist = data.toList();
                   _passwordEditingController.clear();
                   _usernameEditingController.clear();
                   const snackBar = SnackBar(
@@ -115,10 +115,10 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
   }
 
   addLoginCredential() async {
-    final _loginModel = LoginModel(
+    final loginModel = LoginModel(
       username: _usernameEditingController.text,
       password: _passwordEditingController.text,
     );
-    await LoginDb().addLoginCredentials(_loginModel);
+    await LoginDb().addLoginCredentials(loginModel);
   }
 }

@@ -6,7 +6,7 @@ import 'package:money_manager/models/category/category_model.dart';
 ValueNotifier<CategoryType> selectedCategoryNotifier =
     ValueNotifier(CategoryType.income);
 Future<void> showCategoryAddPopup(BuildContext context) async {
-  final _nameEditingController = TextEditingController();
+  final nameEditingController = TextEditingController();
   showDialog(
       context: context,
       builder: (ctx) {
@@ -16,7 +16,7 @@ Future<void> showCategoryAddPopup(BuildContext context) async {
             Padding(
               padding: const EdgeInsets.all(8.0),
               child: TextFormField(
-                controller: _nameEditingController,
+                controller: nameEditingController,
                 decoration: const InputDecoration(
                   hintText: 'Category Name',
                   border: OutlineInputBorder(),
@@ -42,16 +42,16 @@ Future<void> showCategoryAddPopup(BuildContext context) async {
               padding: const EdgeInsets.all(8.0),
               child: ElevatedButton(
                   onPressed: () {
-                    final _name = _nameEditingController.text;
-                    if (_name.isEmpty) {
+                    final name = nameEditingController.text;
+                    if (name.isEmpty) {
                       return;
                     }
                     final _type = selectedCategoryNotifier.value;
-                    final _category = CategoryModel(
+                    final category = CategoryModel(
                         id: DateTime.now().millisecondsSinceEpoch.toString(),
-                        name: _name,
+                        name: name,
                         type: _type);
-                    CategoryDB().insertCategory(_category);
+                    CategoryDB().insertCategory(category);
                     Navigator.of(ctx).pop();
                   },
                   child: const Text('Add')),

@@ -57,7 +57,8 @@ class _ScreenAddTransactionState extends State<ScreenAddTransaction> {
                   final _selectedDateTemp = await showDatePicker(
                     context: context,
                     initialDate: DateTime.now(),
-                    firstDate: DateTime.now().subtract(Duration(days: 30)),
+                    firstDate:
+                        DateTime.now().subtract(const Duration(days: 30)),
                     lastDate: DateTime.now(),
                   );
 
@@ -87,7 +88,7 @@ class _ScreenAddTransactionState extends State<ScreenAddTransaction> {
                       });
                     },
                   ),
-                  Text('Income'),
+                  const Text('Income'),
                   Radio(
                     value: CategoryType.expense,
                     groupValue: _selectedCategoryType,
@@ -98,7 +99,7 @@ class _ScreenAddTransactionState extends State<ScreenAddTransaction> {
                       });
                     },
                   ),
-                  Text('Expense'),
+                  const Text('Expense'),
                 ],
               ),
               DropdownButton<String>(
@@ -129,7 +130,7 @@ class _ScreenAddTransactionState extends State<ScreenAddTransaction> {
                   onPressed: () {
                     addTransaction();
                   },
-                  child: Text('Submit'),
+                  child: const Text('Submit'),
                 ),
               )
             ],

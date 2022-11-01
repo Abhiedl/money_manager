@@ -1,8 +1,8 @@
 import 'dart:async';
 import 'package:flutter/material.dart';
-import 'package:flutter/src/widgets/framework.dart';
-import 'package:money_manager/screens/Register/register_page.dart';
-import 'package:money_manager/screens/home/screen_home.dart';
+// import 'package:flutter/src/widgets/framework.dart';
+// import 'package:money_manager/screens/Register/register_page.dart';
+// import 'package:money_manager/screens/home/screen_home.dart';
 import 'package:money_manager/screens/log_in/log_in.dart';
 
 class SplashScreen extends StatefulWidget {
