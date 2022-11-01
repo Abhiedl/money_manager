@@ -33,7 +33,6 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       title: 'Flutter Demo',
       theme: ThemeData(
-        fontFamily: 'Railway',
         primarySwatch: Colors.blue,
       ),
       home: const SplashScreen(),
