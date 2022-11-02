@@ -1,6 +1,6 @@
 # money_manager
 
-A new Flutter project.
+Money manager is a simple android application made by flutter and dart. It is used to manage our incomes and expenses in a reliable and easy way.
 
 ## Getting Started
 
